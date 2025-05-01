@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { GlobalContext } from '../context'
 import { useParams } from "react-router-dom"
+import { setItems } from '../utils/localStorage';
 
 function Details() {
   const { id } = useParams();
@@ -14,6 +15,10 @@ function Details() {
     }
     getRecipe();
   }, [id]);
+
+  useEffect(() => {
+    setItems('favorites', favorites);
+  }, [favorites]);
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] py-10 px-4 md:px-10 text-white">
