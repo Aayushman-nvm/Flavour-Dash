@@ -1,41 +1,76 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { GlobalContext } from "../context";
+import React, { useContext, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { GlobalContext } from '../context';
+import { Menu, X } from 'lucide-react';
 
-export default function Navbar() {
+function Navbar() {
   const { search, setSearch, handleSubmit } = useContext(GlobalContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <header className="bg-gradient-to-r from-lime-200 to-green-300 shadow-lg py-4 px-6 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <h2 className="text-3xl font-extrabold text-[#1A3129] tracking-tight hover:scale-105 transition-transform">
-          <NavLink to="/">Flavour Dash</NavLink>
+    <div className="w-full bg-[#121212] text-white py-4 px-6 shadow-md relative md:flex md:flex-col md:items-center">
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold tracking-wider font-mono text-[#00ff99] animate-pulse">
+          <NavLink to={'/'}>
+            Flavour Dash
+          </NavLink>
         </h2>
-        <form onSubmit={handleSubmit} className="flex gap-2">
-          <input
-            type="text"
-            name="search"
-            placeholder="Search recipes..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="px-4 py-2 rounded-xl border-2 border-[#9ECD27] focus:outline-none focus:ring-2 focus:ring-[#BCDD67] transition-all w-40 md:w-64 text-sm md:text-base"
-          />
-          <button
+
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="mt-4 md:mt-0 flex gap-2">
+        <input
+          type='text'
+          name='search'
+          placeholder='Search recipe'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full md:w-[500px] px-4 py-2 rounded-md text-black bg-green-200 shadow-inner focus:outline-none focus:ring-2 focus:ring-[#00ff99]"
+        />
+        <button
             type="submit"
-            className="bg-[#9ECD27] hover:bg-[#86c114] text-white px-4 py-2 rounded-xl font-semibold shadow-md"
+            className="bg-green-500 hover:bg-green-300 text-white px-4 py-2 rounded-md font-semibold shadow-md"
           >
             Search
           </button>
-        </form>
-        <ul className="hidden md:flex gap-6 text-[#1A3129] font-semibold text-lg">
-          <li className="hover:text-[#9ECD27] transition-colors">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li className="hover:text-[#9ECD27] transition-colors">
-            <NavLink to="/favorites">Favourites</NavLink>
-          </li>
-        </ul>
-      </div>
-    </header>
+      </form>
+
+      {/* Desktop Nav */}
+      <ul className="hidden md:flex gap-8 mt-4 text-lg font-medium">
+        <li>
+          <NavLink to={'/'} className={({ isActive }) => isActive ? 'text-[#00ff99]' : 'hover:text-[#00ff99]'}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={'/favorites'} className={({ isActive }) => isActive ? 'text-[#00ff99]' : 'hover:text-[#00ff99]'}>
+            Favourites
+          </NavLink>
+        </li>
+      </ul>
+
+      {/* Mobile Sidebar Nav */}
+      {isOpen && (
+        <div className="absolute top-16 left-0 w-full bg-[#1a1a1a] z-50 py-6 px-4 rounded-md animate-slide-in-down flex flex-col gap-4">
+          <NavLink to={'/'} onClick={toggleMenu} className={({ isActive }) => isActive ? 'text-[#00ff99]' : 'hover:text-[#00ff99]'}>
+            Home
+          </NavLink>
+          <NavLink to={'/favorites'} onClick={toggleMenu} className={({ isActive }) => isActive ? 'text-[#00ff99]' : 'hover:text-[#00ff99]'}>
+            Favourites
+          </NavLink>
+        </div>
+      )}
+    </div>
   );
 }
+
+export default Navbar;
