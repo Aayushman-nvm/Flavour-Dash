@@ -1,5 +1,5 @@
 import { GlobalContext } from '../context';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import RecipeCard from '../components/RecipeCard';
 
 function Home() {

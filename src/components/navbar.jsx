@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { GlobalContext } from '../context';
 import { Menu, X } from 'lucide-react';
@@ -37,11 +37,11 @@ function Navbar() {
           className="w-full md:w-[500px] px-4 py-2 rounded-md text-black bg-green-200 shadow-inner focus:outline-none focus:ring-2 focus:ring-[#00ff99]"
         />
         <button
-            type="submit"
-            className="bg-green-500 hover:bg-green-300 text-white px-4 py-2 rounded-md font-semibold shadow-md"
-          >
-            Search
-          </button>
+          type="submit"
+          className="bg-green-500 hover:bg-green-300 text-white px-4 py-2 rounded-md font-semibold shadow-md"
+        >
+          Search
+        </button>
       </form>
 
       {/* Desktop Nav */}

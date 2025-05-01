@@ -1,5 +1,6 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { getItems } from '../utils/localStorage';
 export const GlobalContext = createContext(null);
 
 function GlobalState({ children }) {
@@ -7,7 +8,10 @@ function GlobalState({ children }) {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
   const [recipe, setRecipe] = useState(null);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    const items = getItems('favorites');
+    return items || [];
+  });
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
