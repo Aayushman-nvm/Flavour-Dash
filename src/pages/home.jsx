@@ -7,14 +7,14 @@ function Home() {
 
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#fdfcfb] to-[#e2d1c3]">
-        <p className="text-xl font-semibold animate-pulse text-[#1A3129]">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
+        <p className="text-xl font-semibold animate-pulse text-[#7bd8b7]">Loading...</p>
       </div>
     );
 
   return (
-    <div className="bg-gradient-to-b from-[#fdfcfb] to-[#e2d1c3] min-h-screen w-full animate-fade-in p-6 sm:p-10">
-      <h1 className="text-3xl sm:text-5xl font-extrabold text-[#1A3129] mb-10 text-center tracking-tight drop-shadow-md">
+    <div className="bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] min-h-screen w-full animate-fade-in p-6 sm:p-10">
+      <h1 className="text-3xl sm:text-5xl font-extrabold text-[#88f0cc] mb-10 text-center tracking-tight drop-shadow-md">
         Explore Recipes
       </h1>
 
